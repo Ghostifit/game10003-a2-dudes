@@ -54,7 +54,6 @@ namespace Game10003
                 float y = ycoords[i];
                 Draw.Circle(x, y, 45);
             }
-            
             //EYES
             for (int i = 0; i < 8; i++)
             {
