@@ -11,6 +11,9 @@ namespace Game10003
     /// </summary>
     public class Game
     {
+
+        Color colorRandom = Random.Color();
+
         // Place your variables here:
         float[] eyeRadii = {
             5f,
@@ -49,6 +52,32 @@ namespace Game10003
         {
             Window.ClearBackground(Color.OffWhite);
 
+            //BODIES
+            Draw.FillColor = colorRandom;
+            Draw.LineColor = Color.Black;
+            Draw.LineSize = 2;
+            float[] xcoords = new float[100];
+            float[] ycoords = new float[100];
+            //Lil Dude 1 Body
+            xcoords[0] = 150;
+            ycoords[0] = 200;
+            //Lil Dude 2 Body
+            xcoords[1] = 700;
+            ycoords[1] = 200;
+            //Lil Dude 3 Body
+            xcoords[2] = 100;
+            ycoords[2] = 450;
+            //Lil Dude 4 Body
+            xcoords[3] = 550;
+            ycoords[3] = 400;
+
+            for (int i = 0; i < 4; i++)
+            {
+                float x = xcoords[i];
+                float y = ycoords[i];
+                Draw.Circle(x, y, 45);
+            }
+
             for (int i = 0; i < 8; i++)
             {
                 DrawEye(eyePositions[i], eyeRadii[i]);
@@ -57,90 +86,29 @@ namespace Game10003
             void DrawEye(Vector2 eyePosition, float eyeRadius)
             {
                 eyePosition += new Vector2(0, 20f);
-
-                eyeRadius += 50.0f;
-
-                float pupilRadius = (22f / 50f) * eyeRadius;
-
+                eyeRadius += 15.0f;
+                float pupilRadius = (20f / 40f) * eyeRadius;
                 Vector2 mousePosition = Input.GetMousePosition();
-
                 Vector2 offset = new(0, 0);
-
                 Vector2 eyeToMouse = mousePosition - eyePosition;
-
-                float eyeWhiteSpaceRadius = eyeRadius;
+                float eyeWhiteSpaceRadius = eyeRadius - 10;
                 offset = Vector2.Normalize(eyeToMouse) * eyeWhiteSpaceRadius;
-
                 if (Vector2.Distance(eyePosition, mousePosition) < eyeWhiteSpaceRadius)
                 {
                     offset = -eyePosition + mousePosition;
                 }
-
                 for (int i = 0; i < 8; i++)
                 {
+                    Draw.FillColor = Color.White;
+                    Draw.LineColor = Color.Black;
+                    Draw.Circle(eyePosition, eyeRadius);
                     Draw.FillColor = Color.Black;
+
                     Draw.LineColor = Color.DarkGray;
                     Draw.LineSize = 2;
                     Draw.Circle(eyePosition + offset, pupilRadius);
                 }
-
-
-                    //BODIES
-                    Draw.FillColor = Color.Blue;
-                    Draw.LineColor = Color.DarkGray;
-                    Draw.LineSize = 2;
-                    float[] xcoords = new float[100];
-                    float[] ycoords = new float[100];
-                    //Lil Dude 1 Body
-                    xcoords[0] = 150;
-                    ycoords[0] = 200;
-                    //Lil Dude 2 Body
-                    xcoords[1] = 700;
-                    ycoords[1] = 200;
-                    //Lil Dude 3 Body
-                    xcoords[2] = 100;
-                    ycoords[2] = 450;
-                    //Lil Dude 4 Body
-                    xcoords[3] = 550;
-                    ycoords[3] = 400;
-
-                    for (int i = 0; i < 4; i++)
-                    {
-                        float x = xcoords[i];
-                        float y = ycoords[i];
-                        Draw.Circle(x, y, 45);
-                    }
-                    //EYES
-                    for (int i = 0; i < 8; i++)
-                    {
-                        float x = xcoords[i];
-                        float y = ycoords[i];
-                        Draw.FillColor = Color.White;
-                        Draw.LineColor = Color.DarkGray;
-                        Draw.LineSize = 2;
-                        Draw.Circle(x, y, 20);
-                        //Lil Dude 1 Eyes //THISXYCOORD[0] IS APPARENTLY THE LEFT PUPIL?????
-                        xcoords[0] = 155;
-                        ycoords[0] = 215;
-                        xcoords[1] = 180;
-                        ycoords[1] = 180;
-                        //Lil Dude 2 Eyes 
-                        xcoords[2] = 680;
-                        ycoords[2] = 180;
-                        xcoords[3] = 720;
-                        ycoords[3] = 180;
-                        //Lil Dude 3 Eyes
-                        xcoords[4] = 80;
-                        ycoords[4] = 430;
-                        xcoords[5] = 120;
-                        ycoords[5] = 430;
-                        //Lil Dude 4 Eyes 
-                        xcoords[6] = 530;
-                        ycoords[6] = 380;
-                        xcoords[7] = 550;
-                        ycoords[7] = 380;
-                    }
-                }
             }
         }
     }
+}
